@@ -1,0 +1,3 @@
+Server=DESKTOP-70HUVKC;
+Database=AdventureWorksDW2017;
+Trusted_Connection=True;
