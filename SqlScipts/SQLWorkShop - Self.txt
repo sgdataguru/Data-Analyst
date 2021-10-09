@@ -1,0 +1,399 @@
+SQL Datbase workshop
+
+SQL Server: 52.163.82.157
+Username: sqluser
+Password: Password@1234
+
+
+SQL Create operations
+--------------------
+
+1. First, lets create a Database.
+
+CREATE DATABASE SQLWorkShop;
+
+2.Now, lets create a table 'person' with some schema/fields/columns
+
+USE SQLWorkShop;
+CREATE TABLE Persons (PersonID int,
+                      LastName varchar(255),
+					  FirstName varchar(255),
+					  Address varchar(255),
+					  City varchar(255));
+
+3. Create a table from another table with data
+
+USE SQLWorkShop;
+SELECT 
+       AddressID, 
+       AddressLine1, 
+       AddressLine2, 
+       City, 
+       PostalCode
+INTO 
+     Address
+FROM OLTP_Dataset.Person.Address
+WHERE AddressID < 100;
+
+SQL Read Operations
+--------------------
+
+4. select all the columns/fields from table ‘Address’ in ‘Person’ database
+
+USE OLTP_Dataset;
+SELECT 
+       *
+FROM Person.Address;
+
+5. Get all the employee who has 'JobTitle' as  ‘Design Engineer’
+
+USE OLTP_Dataset;
+SELECT 
+       BusinessEntityID, 
+       JobTitle, 
+       LoginID
+FROM HumanResources.Employee
+WHERE JobTitle = 'Design Engineer';
+
+---WHERE clause examples
+
+6. Get all the employee who are not ‘Design Engineer’
+
+USE OLTP_Dataset;
+SELECT 
+       BusinessEntityID, 
+       JobTitle, 
+       LoginID
+FROM HumanResources.Employee
+WHERE JobTitle <> 'Design Engineer';
+
+7. Display details of the persons whose record modified between January 1st 2009 and December 31st 2013
+
+USE OLTP_Dataset;
+SELECT 
+       BusinessEntityID, 
+       FirstName, 
+       MiddleName, 
+       LastName, 
+       ModifiedDate
+FROM Person.Person
+WHERE ModifiedDate BETWEEN '2009-01-01' AND '2013-12-31';
+
+8. Display Product Id and its Name where name of the product has ‘Bike’ string
+
+USE OLTP_Dataset;
+SELECT 
+       ProductID, 
+       Name
+FROM Production.Product
+WHERE Name LIKE '%Bike%';
+
+---GROUPBY clause examples
+
+9. Get the total number of item ordered for each productId
+
+USE OLTP_Dataset;
+SELECT 
+       SUM(OrderQty) AS Total, 
+       ProductID
+FROM Sales.SalesOrderDetail
+GROUP BY 
+         ProductID;
+
+10. Display count of orders placed by year for each customer
+
+USE OLTP_Dataset;
+SELECT 
+       CustomerID, 
+       COUNT(*) AS SalesCount, 
+       YEAR(OrderDate) AS OrderYear
+FROM Sales.SalesOrderHeader
+GROUP BY 
+         CustomerID, 
+         YEAR(OrderDate);
+
+11. Get the product Id ordered more than 5000 times
+
+USE OLTP_Dataset;
+SELECT 
+       SUM(OrderQty) AS TotalOrdered, 
+       ProductID
+FROM Sales.SalesOrderDetail
+GROUP BY 
+         ProductID
+HAVING SUM(OrderQty) > 5000;
+
+--ORDERBY clause examples
+
+12. Sort the record by last name Ascending order
+
+USE OLTP_Dataset;
+SELECT 
+       BusinessEntityID, 
+       LastName, 
+       FirstName, 
+       MiddleName
+FROM Person.Person
+ORDER BY 
+         LastName ASC;
+
+13. Sort the record by last name Decending order
+
+USE OLTP_Dataset;
+SELECT 
+       BusinessEntityID, 
+       LastName, 
+       FirstName, 
+       MiddleName
+FROM Person.Person
+ORDER BY 
+         LastName Desc;
+
+--JOIN examples
+
+14. Get personal information of the person working as an employee in the company
+
+USE OLTP_Dataset;
+SELECT 
+       JobTitle, 
+       BirthDate, 
+       FirstName, 
+       LastName
+FROM
+     HumanResources.Employee AS E INNER JOIN Person.Person AS P
+     ON E.BusinessEntityID = P.BusinessEntityID;
+
+15. Displays all the products along with the SalesOrderID even if an order has never been placed for that product
+
+USE OLTP_Dataset;
+SELECT 
+       SalesOrderID, 
+       P.ProductID, 
+       P.Name
+FROM
+     Production.Product AS P LEFT JOIN Sales.SalesOrderDetail AS SO
+     ON P.ProductID = SO.ProductID;
+
+--All clauses combined
+
+16. Select city, postal code and modified date from table ‘Address’ and AddressTypeID from table ‘BusinessEntityAddress’, where AddressTypeID is equal to 3, grouping the result by city, postal code, modified date, address type id. The final result is sorted by postal code in descending order. 
+
+USE OLTP_Dataset;
+SELECT 
+       A.City, 
+       A.PostalCode, 
+       A.ModifiedDate, 
+       B.AddressTypeID
+FROM
+     Person.Address AS A JOIN Person.BusinessEntityAddress AS B
+     ON A.AddressID = B.AddressID
+WHERE B.AddressTypeID = 3
+GROUP BY 
+         A.City, 
+         A.PostalCode, 
+         A.ModifiedDate, 
+         B.AddressTypeID
+ORDER BY 
+         A.PostalCode DESC;
+
+
+SQL Update Operations
+--------------------
+
+17. Person in AddressID = 2 has moved to Boston, update the city name in Address table.
+
+USE SQLWorkShop;
+
+SELECT 
+       *
+FROM  dbo.Address
+WHERE addressid = 2;
+
+UPDATE dbo.Address
+  SET 
+      City = 'Boston'
+WHERE 
+      AddressID = 2;
+	  
+SELECT 
+       *
+FROM  dbo.Address
+WHERE addressid = 2;
+
+SQL Delete Operations
+--------------------
+
+18. Delect the record of the Person in AddressID = 2 
+
+USE SQLWorkShop;
+
+SELECT 
+       *
+FROM dbo.Address
+WHERE addressid = 2;
+
+DELETE FROM dbo.Address
+WHERE 
+      City = 'Boston';
+
+
+Excerise Question
+------------------
+
+1. Displays all the employees who have the job title "Marketing Assistant".
+Note: use HumanResources.Employee table
+
+USE OLTP_Dataset;
+
+SELECT 
+       *
+FROM HumanResources.Employee
+WHERE JobTitle = 'Marketing Assistant';
+
+
+2. Get all the rows from person table where the rows were update after December 12, 2007. 
+Note: use Person.Person table
+
+USE OLTP_Dataset;
+
+SELECT 
+       *
+FROM Person.Person
+WHERE ModifiedDate > '2007-12-12';
+
+3. Get the name of the product with the name starting with ‘Flat’.
+Note: use Production.Product table
+
+USE OLTP_Dataset;
+
+SELECT 
+       *
+FROM Production.Product
+WHERE Name LIKE 'Flat%';
+
+4. Write a query to displaying the sales orders where the total due exceeds $5000 for salesperson ID  281 or the territory ID is 10.
+Note: use Sales.SalesOrderHeader table
+
+USE OLTP_Dataset;
+
+SELECT 
+       SalesOrderID, 
+       TotalDue, 
+       SalesPersonID, 
+       TerritoryID
+FROM Sales.SalesOrderHeader
+WHERE TotalDue > 5000
+      AND (SalesPersonID = 281
+           OR TerritoryID = 10);
+
+5. Get the name and business entity id sorted by firstname and lastname 
+Note: use Person.Person table
+
+USE OLTP_Dataset;
+
+SELECT 
+       BusinessEntityID, 
+       (FirstName + ' ' + LastName) AS Name
+FROM Person.Person
+ORDER BY 
+         FirstName, 
+         LastName;
+
+6. Write a query to listing the sales in order of the month the order was placed and then the year the order was placed
+Note: use Sales.SalesOrderHeader table
+
+USE OLTP_Dataset;
+
+SELECT 
+       SalesOrderID, 
+       OrderDate
+FROM Sales.SalesOrderHeader
+ORDER BY 
+         MONTH(OrderDate), 
+         YEAR(OrderDate);
+
+7. Write a query that find the total number of products placed using SUM function.
+Note: use Sales.SalesOrderDetail table
+
+USE OLTP_Dataset;
+
+SELECT 
+       SUM(OrderQty) AS TotalProductsOrdered
+FROM Sales.SalesOrderDetail;
+
+
+8. Get the total number of items ordered for each product.
+Note: use Sales.SalesOrderDetail table
+
+USE OLTP_Dataset;
+
+SELECT 
+       SUM(OrderQty) AS Total_Ordered, 
+       ProductID
+FROM Sales.SalesOrderDetail
+GROUP BY 
+         ProductID;
+
+9. Display the firstname, lastname of the customer who owns the store 294. 
+Note: Use Sales.Customer and Person.Person table
+
+USE OLTP_Dataset;
+
+SELECT 
+       CustomerID, 
+       StoreID, 
+       TerritoryID, 
+       FirstName, 
+       MiddleName, 
+       LastName
+FROM
+     Sales.Customer AS C INNER JOIN Person.Person AS P
+     ON C.PersonID = P.BusinessEntityID
+WHERE StoreID = 294;
+
+
+10. Display the name and id of the product using subquery.
+Note: use Production.Product and Sales.SalesOrderDetail
+
+USE OLTP_Dataset;
+
+SELECT 
+       ProductID, 
+       Name
+FROM Production.Product
+WHERE ProductID IN
+(
+    SELECT 
+           ProductID
+    FROM Sales.SalesOrderDetail
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
