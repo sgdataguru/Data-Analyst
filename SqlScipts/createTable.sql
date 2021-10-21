@@ -1,3 +1,6 @@
+/* Date :- XX.XX.XXXX Developer name :- Fatima Reason of Creation - Creating the product table becuase of this reasons   */
+
+
 DROP TABLE IF EXISTS Products;
 
 CREATE TABLE Products (
