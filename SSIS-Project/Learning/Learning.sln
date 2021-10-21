@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Learning", "Learning\Learning.dtproj", "{40736B36-5F44-4E83-813D-B1F5184BFD3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40736B36-5F44-4E83-813D-B1F5184BFD3D}.Development|Default.ActiveCfg = Development
+		{40736B36-5F44-4E83-813D-B1F5184BFD3D}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3100AB06-0F2E-46F7-89BB-D06C4B9CF94C}
+	EndGlobalSection
+EndGlobal
