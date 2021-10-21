@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">DESKTOP-70HUVKC</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWoR7uftQP0O97ll0khC0CQAAAAACAAAAAAAQZgAAAAEAACAAAAA155rzqtFoXwp/HR2yYiqUw+LPEd6JRYt3y7DVT8coVAAAAAAOgAAAAAIAACAAAAB6mz6rBWTn9dUUkFHVsqsLdJYjkvI24ASMkjz9MLryQZAAAAC7Sk4vgr9hIkFVG1i1jdAEm52TW/Vv7kd/c/xh8H0ZBbWXDN20LA10IBHc+m8vZCuF4dyE1cxmrzqL1nutq+cXEyqrOyFdPfgkg3ZYB87CjtN1Gzp6nsZ4Ms0PRXB2J7aX3l6SJtOo2Ur57eKBMytoY4a4X28IbSUmJxqgqdKwAuCf1pWrCFctV8gg28oWdlZAAAAAnHy9e3yz3pJysVzGvg9PcSzt8/kaNxDvxuegjpdb9OxmOE3n93QDP4yFk9vlDZzYCnsizxP+e/SqwY/52cAGlA==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWoR7uftQP0O97ll0khC0CQAAAAACAAAAAAAQZgAAAAEAACAAAACc0pBJR49bs/aFQEPo04h5WEz1IPTlsk9FsvULXu7pvQAAAAAOgAAAAAIAACAAAAC9HokZiVTppGL9Io1i1bfIFiqTUiiwLDQ8YpbA034eMZAAAAAWFvh+a7JgRXj0JXgsQ/QF6a+kzIT9H+ORvTOSO0avHwdWuF6YSdfhAJqpkhhb9kQCx67/jFPRHUDRPvbNCLSP+TawO5206XoGwnvNT+gdOAd0Df59wdMph4hokNua0OobDLge0SguKwAKvj2dclII8/qO+cBJaecKanvsuxpE1yo8clbj4+Q8ZQVav6hhKgxAAAAAbN4TBmEBh32b3A2jEWf2CK0hxsrwR9YHbCVPBLxP9TxxRN77nqGk273SPk7mgnZe8oN5YhbPFv+xdQ/TlaFY8g==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -1259,7 +1259,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\GIT\Data-Analyst\Data-Analyst\SqlScipts\people.xlsx;Extended Properties="Excel 12.0 XML;HDR=YES";</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\GIT\Data-Analyst\Data-Analyst\SqlScipts\people.xlsx;Extended Properties="EXCEL 12.0 XML;HDR=YES";</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -1541,7 +1541,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\GIT\Data-Analyst\Data-Analyst\SqlScipts\people.xlsx;Extended Properties="Excel 12.0 XML;HDR=YES";</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\GIT\Data-Analyst\Data-Analyst\SqlScipts\people.xlsx;Extended Properties="EXCEL 12.0 XML;HDR=YES";</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -1673,7 +1673,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\GIT\Data-Analyst\Data-Analyst\SqlScipts\people.xls;Extended Properties="Excel 8.0;HDR=YES";</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\GIT\Data-Analyst\Data-Analyst\SqlScipts\people.xls;Extended Properties="EXCEL 8.0;HDR=YES";</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -1941,6 +1941,8 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">
+                    </SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>

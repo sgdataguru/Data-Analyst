@@ -1,0 +1,1606 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/21/2021 10:49:55 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-70HUVKC"
+  DTS:CreatorName="DESKTOP-70HUVKC\Home"
+  DTS:DTSID="{8DF8DD2D-7297-4DA5-8718-29B761EADA62}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="18441"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{AC5C64C5-1E53-41DF-8C54-EBBE5874F098}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-70HUVKC.Sample]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F6605E7F-C5D6-4672-993C-17AB3FBCC653}"
+      DTS:ObjectName="DESKTOP-70HUVKC.Sample">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-70HUVKC;Initial Catalog=Sample;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-70HUVKC.WideWorldImporters]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A695B10E-8C5E-4E9B-886E-E6A92E83AA2B}"
+      DTS:ObjectName="DESKTOP-70HUVKC.WideWorldImporters">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-70HUVKC;Initial Catalog=WideWorldImporters;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Camping"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6A74C603-7A1F-4E54-AD6A-E0788C7584D8}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Camping"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Camping\Character Map"
+              componentClassID="Microsoft.CharacterMap"
+              contactInfo="Character Map;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Applies string functions to character data. For example, convert from data that is in upper case to lower case. Operates only on column data with a string data type."
+              name="Character Map"
+              usesDispositions="true"
+              version="2">
+              <inputs>
+                <input
+                  refId="Package\Camping\Character Map.Inputs[Character Map Input]"
+                  name="Character Map Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Camping\Character Map.Inputs[Character Map Input].Columns[FullName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="FullName"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[FullName]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Camping\Character Map.Outputs[Character Map Output]"
+                  exclusionGroup="1"
+                  name="Character Map Output"
+                  synchronousInputId="Package\Camping\Character Map.Inputs[Character Map Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Camping\Character Map.Outputs[Character Map Output].Columns[UpperCaseFullName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Map Column"
+                      length="50"
+                      lineageId="Package\Camping\Character Map.Outputs[Character Map Output].Columns[UpperCaseFullName]"
+                      name="UpperCaseFullName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.UInt32"
+                          description="Specifies the string operations to apply."
+                          name="MapFlags"
+                          typeConverter="LCMappingType">512</property>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column to which operations apply."
+                          name="InputColumnLineageID">#{Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[FullName]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Camping\Character Map.Outputs[Character Map Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Character Map Error Output"
+                  synchronousInputId="Package\Camping\Character Map.Inputs[Character Map Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Camping\Character Map.Outputs[Character Map Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Camping\Character Map.Outputs[Character Map Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Camping\Character Map.Outputs[Character Map Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Camping\Character Map.Outputs[Character Map Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Camping\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Camping\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Camping\Conditional Split.Inputs[Conditional Split Input].Columns[IsEmployee]"
+                      cachedDataType="bool"
+                      cachedName="IsEmployee"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsEmployee]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Camping\Conditional Split.Outputs[Employee]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Employee"
+                  synchronousInputId="Package\Camping\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsEmployee]} ==  TRUE </property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">IsEmployee ==  TRUE </property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Camping\Conditional Split.Outputs[Customer]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Customer"
+                  synchronousInputId="Package\Camping\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsEmployee]} ==  FALSE </property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">IsEmployee ==  FALSE </property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Camping\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Camping\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Camping\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Camping\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Camping\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Camping\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Camping\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Camping\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Camping\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Employee]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Camping\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-70HUVKC.Sample]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-70HUVKC.Sample]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PersonID]"
+                      cachedDataType="i4"
+                      cachedName="PersonID"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PersonID]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersonID]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FullName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="FullName"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FullName]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[FullName]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PreferredName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="PreferredName"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PreferredName]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[PreferredName]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SearchName]"
+                      cachedDataType="wstr"
+                      cachedLength="101"
+                      cachedName="SearchName"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SearchName]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[SearchName]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsPermittedToLogon]"
+                      cachedDataType="bool"
+                      cachedName="IsPermittedToLogon"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsPermittedToLogon]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPermittedToLogon]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LogonName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LogonName"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LogonName]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[LogonName]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsExternalLogonProvider]"
+                      cachedDataType="bool"
+                      cachedName="IsExternalLogonProvider"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsExternalLogonProvider]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsExternalLogonProvider]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsSystemUser]"
+                      cachedDataType="bool"
+                      cachedName="IsSystemUser"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsSystemUser]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSystemUser]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsEmployee]"
+                      cachedDataType="bool"
+                      cachedName="IsEmployee"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsEmployee]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsEmployee]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsSalesperson]"
+                      cachedDataType="bool"
+                      cachedName="IsSalesperson"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsSalesperson]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSalesperson]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[UserPreferences]"
+                      cachedDataType="nText"
+                      cachedName="UserPreferences"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UserPreferences]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserPreferences]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="PhoneNumber"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FaxNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="FaxNumber"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FaxNumber]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[FaxNumber]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EmailAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="256"
+                      cachedName="EmailAddress"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmailAddress]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Photo]"
+                      cachedDataType="image"
+                      cachedName="Photo"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Photo]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[Photo]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomFields]"
+                      cachedDataType="nText"
+                      cachedName="CustomFields"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomFields]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomFields]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OtherLanguages]"
+                      cachedDataType="nText"
+                      cachedName="OtherLanguages"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OtherLanguages]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[OtherLanguages]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[UpperCaseFullName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="UpperCaseFullName"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UpperCaseFullName]"
+                      lineageId="Package\Camping\Character Map.Outputs[Character Map Output].Columns[UpperCaseFullName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PersonID]"
+                      dataType="i4"
+                      name="PersonID" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FullName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FullName" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PreferredName]"
+                      dataType="wstr"
+                      length="50"
+                      name="PreferredName" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SearchName]"
+                      dataType="wstr"
+                      length="101"
+                      name="SearchName" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsPermittedToLogon]"
+                      dataType="bool"
+                      name="IsPermittedToLogon" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LogonName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LogonName" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsExternalLogonProvider]"
+                      dataType="bool"
+                      name="IsExternalLogonProvider" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsSystemUser]"
+                      dataType="bool"
+                      name="IsSystemUser" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsEmployee]"
+                      dataType="bool"
+                      name="IsEmployee" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsSalesperson]"
+                      dataType="bool"
+                      name="IsSalesperson" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UserPreferences]"
+                      dataType="nText"
+                      name="UserPreferences" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FaxNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="FaxNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
+                      dataType="wstr"
+                      length="256"
+                      name="EmailAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Photo]"
+                      dataType="image"
+                      name="Photo" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomFields]"
+                      dataType="nText"
+                      name="CustomFields" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OtherLanguages]"
+                      dataType="nText"
+                      name="OtherLanguages" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UpperCaseFullName]"
+                      dataType="wstr"
+                      length="50"
+                      name="UpperCaseFullName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Camping\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Camping\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Camping\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Camping\OLE DB Destination 1"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination 1"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Customer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Camping\OLE DB Destination 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-70HUVKC.Sample]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-70HUVKC.Sample]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[PersonID]"
+                      cachedDataType="i4"
+                      cachedName="PersonID"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PersonID]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersonID]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[FullName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="FullName"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[FullName]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[FullName]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[PreferredName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="PreferredName"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PreferredName]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[PreferredName]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[SearchName]"
+                      cachedDataType="wstr"
+                      cachedLength="101"
+                      cachedName="SearchName"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[SearchName]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[SearchName]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[IsPermittedToLogon]"
+                      cachedDataType="bool"
+                      cachedName="IsPermittedToLogon"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IsPermittedToLogon]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPermittedToLogon]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[LogonName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LogonName"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[LogonName]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[LogonName]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[IsExternalLogonProvider]"
+                      cachedDataType="bool"
+                      cachedName="IsExternalLogonProvider"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IsExternalLogonProvider]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsExternalLogonProvider]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[IsSystemUser]"
+                      cachedDataType="bool"
+                      cachedName="IsSystemUser"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IsSystemUser]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSystemUser]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[IsEmployee]"
+                      cachedDataType="bool"
+                      cachedName="IsEmployee"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IsEmployee]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsEmployee]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[IsSalesperson]"
+                      cachedDataType="bool"
+                      cachedName="IsSalesperson"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IsSalesperson]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSalesperson]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[UserPreferences]"
+                      cachedDataType="nText"
+                      cachedName="UserPreferences"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[UserPreferences]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserPreferences]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="PhoneNumber"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[FaxNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="FaxNumber"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[FaxNumber]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[FaxNumber]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[EmailAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="256"
+                      cachedName="EmailAddress"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmailAddress]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Photo]"
+                      cachedDataType="image"
+                      cachedName="Photo"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Photo]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[Photo]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CustomFields]"
+                      cachedDataType="nText"
+                      cachedName="CustomFields"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CustomFields]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomFields]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[OtherLanguages]"
+                      cachedDataType="nText"
+                      cachedName="OtherLanguages"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[OtherLanguages]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[OtherLanguages]" />
+                    <inputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[UpperCaseFullName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="UpperCaseFullName"
+                      externalMetadataColumnId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[UpperCaseFullName]"
+                      lineageId="Package\Camping\Character Map.Outputs[Character Map Output].Columns[UpperCaseFullName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PersonID]"
+                      dataType="i4"
+                      name="PersonID" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[FullName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FullName" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PreferredName]"
+                      dataType="wstr"
+                      length="50"
+                      name="PreferredName" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[SearchName]"
+                      dataType="wstr"
+                      length="101"
+                      name="SearchName" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IsPermittedToLogon]"
+                      dataType="bool"
+                      name="IsPermittedToLogon" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[LogonName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LogonName" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IsExternalLogonProvider]"
+                      dataType="bool"
+                      name="IsExternalLogonProvider" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IsSystemUser]"
+                      dataType="bool"
+                      name="IsSystemUser" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IsEmployee]"
+                      dataType="bool"
+                      name="IsEmployee" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IsSalesperson]"
+                      dataType="bool"
+                      name="IsSalesperson" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[UserPreferences]"
+                      dataType="nText"
+                      name="UserPreferences" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[FaxNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="FaxNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
+                      dataType="wstr"
+                      length="256"
+                      name="EmailAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Photo]"
+                      dataType="image"
+                      name="Photo" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CustomFields]"
+                      dataType="nText"
+                      name="CustomFields" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[OtherLanguages]"
+                      dataType="nText"
+                      name="OtherLanguages" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[UpperCaseFullName]"
+                      dataType="wstr"
+                      length="50"
+                      name="UpperCaseFullName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Camping\OLE DB Destination 1.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Camping\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Camping\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Camping\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Application].[People]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Camping\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-70HUVKC.WideWorldImporters]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-70HUVKC.WideWorldImporters]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersonID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PersonID]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersonID]"
+                      name="PersonID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[FullName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FullName]"
+                      length="50"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[FullName]"
+                      name="FullName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[PreferredName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PreferredName]"
+                      length="50"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[PreferredName]"
+                      name="PreferredName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[SearchName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SearchName]"
+                      length="101"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[SearchName]"
+                      name="SearchName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPermittedToLogon]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsPermittedToLogon]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPermittedToLogon]"
+                      name="IsPermittedToLogon"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[LogonName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LogonName]"
+                      length="50"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[LogonName]"
+                      name="LogonName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsExternalLogonProvider]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsExternalLogonProvider]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsExternalLogonProvider]"
+                      name="IsExternalLogonProvider"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSystemUser]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsSystemUser]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSystemUser]"
+                      name="IsSystemUser"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsEmployee]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsEmployee]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsEmployee]"
+                      name="IsEmployee"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSalesperson]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsSalesperson]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSalesperson]"
+                      name="IsSalesperson"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserPreferences]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UserPreferences]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserPreferences]"
+                      name="UserPreferences"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                      length="20"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                      name="PhoneNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[FaxNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FaxNumber]"
+                      length="20"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[FaxNumber]"
+                      name="FaxNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmailAddress]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EmailAddress]"
+                      length="256"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmailAddress]"
+                      name="EmailAddress"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[Photo]"
+                      dataType="image"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Photo]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[Photo]"
+                      name="Photo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomFields]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomFields]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomFields]"
+                      name="CustomFields"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[OtherLanguages]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OtherLanguages]"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].Columns[OtherLanguages]"
+                      name="OtherLanguages"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PersonID]"
+                      dataType="i4"
+                      name="PersonID" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FullName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FullName" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PreferredName]"
+                      dataType="wstr"
+                      length="50"
+                      name="PreferredName" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SearchName]"
+                      dataType="wstr"
+                      length="101"
+                      name="SearchName" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsPermittedToLogon]"
+                      dataType="bool"
+                      name="IsPermittedToLogon" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LogonName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LogonName" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsExternalLogonProvider]"
+                      dataType="bool"
+                      name="IsExternalLogonProvider" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HashedPassword]"
+                      dataType="image"
+                      name="HashedPassword" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsSystemUser]"
+                      dataType="bool"
+                      name="IsSystemUser" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsEmployee]"
+                      dataType="bool"
+                      name="IsEmployee" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsSalesperson]"
+                      dataType="bool"
+                      name="IsSalesperson" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UserPreferences]"
+                      dataType="nText"
+                      name="UserPreferences" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FaxNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="FaxNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EmailAddress]"
+                      dataType="wstr"
+                      length="256"
+                      name="EmailAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Photo]"
+                      dataType="image"
+                      name="Photo" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomFields]"
+                      dataType="nText"
+                      name="CustomFields" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OtherLanguages]"
+                      dataType="nText"
+                      name="OtherLanguages" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastEditedBy]"
+                      dataType="i4"
+                      name="LastEditedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp2"
+                      name="ValidFrom"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidTo]"
+                      dataType="dbTimeStamp2"
+                      name="ValidTo"
+                      scale="7" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PersonID]"
+                      dataType="i4"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PersonID]"
+                      name="PersonID" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FullName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FullName]"
+                      name="FullName" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PreferredName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PreferredName]"
+                      name="PreferredName" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SearchName]"
+                      dataType="wstr"
+                      length="101"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SearchName]"
+                      name="SearchName" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsPermittedToLogon]"
+                      dataType="bool"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsPermittedToLogon]"
+                      name="IsPermittedToLogon" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LogonName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LogonName]"
+                      name="LogonName" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsExternalLogonProvider]"
+                      dataType="bool"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsExternalLogonProvider]"
+                      name="IsExternalLogonProvider" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsSystemUser]"
+                      dataType="bool"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsSystemUser]"
+                      name="IsSystemUser" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsEmployee]"
+                      dataType="bool"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsEmployee]"
+                      name="IsEmployee" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsSalesperson]"
+                      dataType="bool"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsSalesperson]"
+                      name="IsSalesperson" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UserPreferences]"
+                      dataType="nText"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UserPreferences]"
+                      name="UserPreferences" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                      name="PhoneNumber" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FaxNumber]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FaxNumber]"
+                      name="FaxNumber" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EmailAddress]"
+                      dataType="wstr"
+                      length="256"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EmailAddress]"
+                      name="EmailAddress" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Photo]"
+                      dataType="image"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Photo]"
+                      name="Photo" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomFields]"
+                      dataType="nText"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomFields]"
+                      name="CustomFields" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OtherLanguages]"
+                      dataType="nText"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OtherLanguages]"
+                      name="OtherLanguages" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Camping.Paths[Character Map Output]"
+              endId="Package\Camping\Conditional Split.Inputs[Conditional Split Input]"
+              name="Character Map Output"
+              startId="Package\Camping\Character Map.Outputs[Character Map Output]" />
+            <path
+              refId="Package\Camping.Paths[Customer]"
+              endId="Package\Camping\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+              name="Customer"
+              startId="Package\Camping\Conditional Split.Outputs[Customer]" />
+            <path
+              refId="Package\Camping.Paths[Employee]"
+              endId="Package\Camping\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Employee"
+              startId="Package\Camping\Conditional Split.Outputs[Employee]" />
+            <path
+              refId="Package\Camping.Paths[OLE DB Source Output]"
+              endId="Package\Camping\Character Map.Inputs[Character Map Input]"
+              name="OLE DB Source Output"
+              startId="Package\Camping\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\MarketKPI"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{ECBA107B-D4FE-4F01-A5FD-AC25CBA8760B}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MarketKPI"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{18F7C93D-EE39-4539-B953-1BC3EC35C804}"
+      DTS:From="Package\Camping"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\MarketKPI"
+      DTS:Value="2" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="122.666666666667,42.6666666666667"
+          Id="Package\Camping"
+          TopLeft="129.249998155981,82.8157909289622" />
+        <NodeLayout
+          Size="129.333333333334,42.6666666666667"
+          Id="Package\MarketKPI"
+          TopLeft="297.999996088445,143.605265192708" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="251.916664822648,104.149124262296">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="46.0833312657974,60.789474263746"
+              Start="0,0"
+              End="38.5833312657974,60.789474263746">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="19.0416656328987,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.0416656328987,0"
+                    Point2="23.0416656328987,0"
+                    Point3="23.0416656328987,4" />
+                  <mssgle:LineSegment
+                    End="23.0416656328987,56.789474263746" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.0416656328987,56.789474263746"
+                    Point2="23.0416656328987,60.789474263746"
+                    Point3="27.0416656328987,60.789474263746" />
+                  <mssgle:LineSegment
+                    End="38.5833312657974,60.789474263746" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-2.26278749210132,-17.609375,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Camping">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Camping\OLE DB Source"
+          TopLeft="82.99999884516,53.3947377436049" />
+        <NodeLayout
+          Size="150.666666666667,42.6666666666667"
+          Id="Package\Camping\Character Map"
+          TopLeft="326.249995138496,123.157897054984" />
+        <EdgeLayout
+          Id="Package\Camping.Paths[OLE DB Source Output]"
+          TopLeft="160.333332178493,96.0614044102716">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="241.249996293336,27.0964926447124"
+              Start="0,0"
+              End="241.249996293336,19.5964926447124">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.54824632235621" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.54824632235621"
+                    Point2="0,13.5482463223562"
+                    Point3="4,13.5482463223562" />
+                  <mssgle:LineSegment
+                    End="237.249996293336,13.5482463223562" />
+                  <mssgle:CubicBezierSegment
+                    Point1="237.249996293336,13.5482463223562"
+                    Point2="241.249996293336,13.5482463223562"
+                    Point3="241.249996293336,17.5482463223562" />
+                  <mssgle:LineSegment
+                    End="241.249996293336,19.5964926447124" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="174.666666666667,42.6666666666667"
+          Id="Package\Camping\OLE DB Destination"
+          TopLeft="706.749989550561,293.043858824894" />
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\Camping\Conditional Split"
+          TopLeft="491.249992679804,197.052635287974" />
+        <EdgeLayout
+          Id="Package\Camping.Paths[Character Map Output]"
+          TopLeft="401.58332847183,165.824563721651">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="168.333330874642,31.2280715663238"
+              Start="0,0"
+              End="168.333330874642,23.7280715663238">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.6140357831619" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.6140357831619"
+                    Point2="0,15.6140357831619"
+                    Point3="4,15.6140357831619" />
+                  <mssgle:LineSegment
+                    End="164.333330874642,15.6140357831619" />
+                  <mssgle:CubicBezierSegment
+                    Point1="164.333330874642,15.6140357831619"
+                    Point2="168.333330874642,15.6140357831619"
+                    Point3="168.333330874642,19.6140357831619" />
+                  <mssgle:LineSegment
+                    End="168.333330874642,23.7280715663238" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Camping.Paths[Employee]"
+          TopLeft="594.80554823536,239.719301954641">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="199.277774648534,53.3245568702534"
+              Start="0,0"
+              End="199.277774648534,45.8245568702534">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.651917386915" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.651917386915"
+                    Point2="0,21.651917386915"
+                    Point3="4,21.651917386915" />
+                  <mssgle:LineSegment
+                    End="195.277774648534,21.651917386915" />
+                  <mssgle:CubicBezierSegment
+                    Point1="195.277774648534,21.651917386915"
+                    Point2="199.277774648534,21.651917386915"
+                    Point3="199.277774648534,25.651917386915" />
+                  <mssgle:LineSegment
+                    End="199.277774648534,45.8245568702534" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="68.8888873242671,26.651917386915,61.5,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="174.666666666667,42.6666666666667"
+          Id="Package\Camping\OLE DB Destination 1"
+          TopLeft="306.749995511025,290.34210245563" />
+        <EdgeLayout
+          Id="Package\Camping.Paths[Customer]"
+          TopLeft="545.027770457582,239.719301954641">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-150.944441613224,50.6228005009893"
+              Start="0,0"
+              End="-150.944441613224,43.1228005009893">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5548955054353" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.5548955054353"
+                    Point2="0,20.5548955054353"
+                    Point3="-4,20.5548955054353" />
+                  <mssgle:LineSegment
+                    End="-146.944441613224,20.5548955054353" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-146.944441613224,20.5548955054353"
+                    Point2="-150.944441613224,20.5548955054353"
+                    Point3="-150.944441613224,24.5548955054353" />
+                  <mssgle:LineSegment
+                    End="-150.944441613224,43.1228005009893" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-105.989564556612,25.5548955054353,61.0346875,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Camping\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Camping\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Camping\OLE DB Destination 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
